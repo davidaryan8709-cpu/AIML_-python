@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#f5f7fb;
+color:#222;
+transition:.4s;
+}
+
+body.dark{
+background:#111827;
+color:white;
+}
+
+header{
+position:fixed;
+top:0;
+width:100%;
+padding:20px 10%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:white;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+z-index:1000;
+transition:.4s;
+}
+
+body.dark header{
+background:#1f2937;
+}
+
+.logo{
+font-size:28px;
+font-weight:700;
+color:#4f46e5;
+}
+
+nav a{
+text-decoration:none;
+margin-left:25px;
+color:#444;
+font-weight:500;
+transition:.3s;
+}
+
+body.dark nav a{
+color:white;
+}
+
+nav a:hover{
+color:#4f46e5;
+}
+
+.toggle{
+font-size:22px;
+cursor:pointer;
+}
+
+section{
+padding:100px 10%;
+}
+
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:center;
+min-height:100vh;
+flex-wrap:wrap;
+}
+
+.hero-text{
+flex:1;
+}
+
+.hero-text h1{
+font-size:60px;
+margin-bottom:10px;
+}
+
+.hero-text h2{
+font-size:28px;
+color:#4f46e5;
+height:40px;
+}
+
+.hero-text p{
+margin:25px 0;
+line-height:1.8;
+max-width:600px;
+}
+
+.btn{
+padding:14px 28px;
+background:#4f46e5;
+color:white;
+text-decoration:none;
+border-radius:30px;
+display:inline-block;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-5px);
+}
+
+.hero-image{
+flex:1;
+text-align:center;
+}
+
+.hero-image img{
+width:350px;
+border-radius:50%;
+border:10px solid white;
+box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+
+.title{
+text-align:center;
+font-size:40px;
+margin-bottom:60px;
+color:#4f46e5;
+}
+
+.about{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:40px;
+}
+
+.card{
+background:white;
+padding:35px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.4s;
+}
+
+body.dark .card{
+background:#1f2937;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.skills .skill{
+margin-bottom:25px;
+}
+
+.progress{
+height:12px;
+background:#ddd;
+border-radius:30px;
+overflow:hidden;
+}
+
+.progress span{
+display:block;
+height:100%;
+background:linear-gradient(90deg,#4f46e5,#06b6d4);
+}
+
+.timeline{
+border-left:4px solid #4f46e5;
+padding-left:30px;
+}
+
+.timeline div{
+margin-bottom:40px;
+}
+
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+.project{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+body.dark .project{
+background:#1f2937;
+}
+
+.project:hover{
+transform:translateY(-8px);
+}
+
+.contact form{
+display:grid;
+gap:20px;
+}
+
+input,textarea{
+padding:15px;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+button{
+padding:15px;
+border:none;
+background:#4f46e5;
+color:white;
+border-radius:10px;
+cursor:pointer;
+font-size:17px;
+}
+
+footer{
+text-align:center;
+padding:30px;
+background:#4f46e5;
+color:white;
+}
+
+.topBtn{
+position:fixed;
+bottom:30px;
+right:30px;
+width:50px;
+height:50px;
+border-radius:50%;
+background:#4f46e5;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:22px;
+cursor:pointer;
+display:none;
+}
+
+.show{
+display:flex;
+}
+
+.fade{
+opacity:0;
+transform:translateY(50px);
+transition:1s;
+}
+
+.fade.active{
+opacity:1;
+transform:translateY(0);
+}
+
+@media(max-width:900px){
+
+.hero{
+text-align:center;
+}
+
+.hero-text h1{
+font-size:45px;
+}
+
+.hero-image img{
+margin-top:40px;
+width:250px;
+}
+
+nav{
+display:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">Portfolio</div>
+
+<nav>
+
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#education">Education</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+
+</nav>
+
+<div class="toggle">🌙</div>
+
+</header>
+
+<section class="hero" id="home">
+
+<div class="hero-text">
+
+<h1>Hi, I'm Raushan Raj</h1>
+
+<h2 id="typing"></h2>
+
+<p>
+Computer Science Engineering Student passionate about Artificial Intelligence,
+Machine Learning, Data Science, Full Stack Development and Research.
+</p>
+
+<a href="#" class="btn">Download Resume</a>
+
+</div>
+
+<div class="hero-image">
+
+<img src="C:\Users\Raushan Pandit\Pictures\WhatsApp Image 2026-05-12 at 3.07.22 PM (1).jpeg" alt="profile">
+
+</div>
+
+</section>
+
+<section id="about">
+
+<h2 class="title">About Me</h2>
+
+<div class="about fade">
+
+<div class="card">
+
+<h3>Who Am I?</h3>
+
+<p>
+
+I am a Computer Science student interested in solving real-world problems using technology.
+I enjoy building websites, AI applications and participating in research projects.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Career Goal</h3>
+
+<p>
+
+To become an AI Engineer / Software Engineer and contribute towards innovative technologies.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="skills">
+
+<h2 class="title">Skills</h2>
+
+<div class="card skills fade">
+
+<div class="skill">
+
+HTML
+
+<div class="progress">
+
+<span style="width:95%"></span>
+
+</div>
+
+</div>
+
+<div class="skill">
+
+CSS
+
+<div class="progress">
+
+<span style="width:90%"></span>
+
+</div>
+
+</div>
+
+<div class="skill">
+
+JavaScript
+
+<div class="progress">
+
+<span style="width:85%"></span>
+
+</div>
+
+</div>
+
+<div class="skill">
+
+Python
+
+<div class="progress">
+
+<span style="width:90%"></span>
+
+</div>
+
+</div>
+
+<div class="skill">
+
+Machine Learning
+
+<div class="progress">
+
+<span style="width:80%"></span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="education">
+
+<h2 class="title">Education</h2>
+
+<div class="timeline fade">
+
+<div>
+
+<h3>Computer Science</h3>
+
+<p>Government polytechnic Channsandra</p>
+
+</div>
+
+
+<div>
+
+<h3>School</h3>
+
+<p>Completed Secondary Education</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="projects">
+
+<h2 class="title">Projects</h2>
+
+<div class="projects fade">
+
+<div class="project">
+
+<h3>EarthVista Intelligence</h3>
+
+<p>
+
+AI-powered Earth Observation Platform.
+
+</p>
+
+</div>
+
+<div class="project">
+
+<h3>EV Charging Finder</h3>
+
+<p>
+
+Locate nearest EV charging stations with maps.
+
+</p>
+
+</div>
+
+<div class="project">
+
+<h3>Student Management System</h3>
+
+<p>
+
+Complete CRUD web application.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="title">Certificates</h2>
+
+<div class="projects fade">
+
+<div class="project">
+
+Google UI/UX
+
+</div>
+
+<div class="project">
+
+ISRO Internship
+
+</div>
+
+<div class="project">
+
+Research Publication
+
+</div>
+
+</div>
+
+</section>
+
+<section class="contact" id="contact">
+
+<h2 class="title">Contact Me</h2>
+
+<form class="fade">
+
+<input type="text" placeholder="Your Name">
+
+<input type="email" placeholder="Email">
+
+<textarea rows="6" placeholder="Message"></textarea>
+
+<button>Send Message</button>
+
+</form>
+
+</section>
+
+<footer>
+
+© 2026 Raushan Raj   | All Rights Reserved
+
+</footer>
+
+<div class="topBtn">↑</div>
+
+<script>
+
+const words=[
+"Computer Science Student",
+"AI Enthusiast",
+"Full Stack Developer",
+"Machine Learning Learner",
+"Research Intern"
+];
+
+let i=0;
+let j=0;
+let current="";
+let isDeleting=false;
+
+function type(){
+
+current=words[i];
+
+if(isDeleting){
+
+j--;
+
+}else{
+
+j++;
+
+}
+
+document.getElementById("typing").textContent=current.substring(0,j);
+
+if(!isDeleting && j==current.length){
+
+isDeleting=true;
+
+setTimeout(type,1000);
+
+return;
+
+}
+
+if(isDeleting && j==0){
+
+isDeleting=false;
+
+i++;
+
+if(i==words.length){
+
+i=0;
+
+}
+
+}
+
+setTimeout(type,isDeleting?50:120);
+
+}
+
+type();
+
+const toggle=document.querySelector(".toggle");
+
+toggle.onclick=()=>{
+
+document.body.classList.toggle("dark");
+
+toggle.innerHTML=document.body.classList.contains("dark")?"☀️":"🌙";
+
+};
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("active");
+
+}
+
+});
+
+});
+
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+
+const topBtn=document.querySelector(".topBtn");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>300){
+
+topBtn.classList.add("show");
+
+}else{
+
+topBtn.classList.remove("show");
+
+}
+
+});
+
+topBtn.onclick=()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+document.querySelector("form").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+alert("Thank you! Your message has been received.");
+
+this.reset();
+
+});
+
+</script>
+
+</body>
+</html>
